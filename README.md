@@ -35,6 +35,7 @@ nは次元数、vij は i 番目の単語ベクトル j 成分。各 vij は dou
 
 ### 4. 実験
 
+python インタープリタ上で
 ```
 from vector_operator import VectorOperator
 vec = VectorOperator(次元数, "vec/wiki", "wiki/word_to_id.pkl", "wiki/id_to_word.pkl")
