@@ -19,7 +19,7 @@ python wiki_to_corpus_data.py -p wiki.txt -o wiki
 ### 3. 学習
 
 まずベクトルの次元数やコーパスの最大サイズなどを `src/configure.hpp` で設定し、ビルドする。
-ハイパーパラメータは src/train.cpp を直接編集する。
+ハイパーパラメータは `src/train.cpp` を直接編集する。
 
 `make` すると実行ファイル `bin/train` が生成される。
 
