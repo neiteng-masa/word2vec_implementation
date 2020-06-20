@@ -11,7 +11,7 @@ from scipy import interpolate
 
 class DiscreteDist:
     def __init__(self, p):
-        size = p.shape[0] * 1000
+        size = p.shape[0] * 10
         cum = np.cumsum(p)
         cum *= size / cum[-1]
         cum = np.r_[0, cum] # p.shape[0] + 1
@@ -74,10 +74,10 @@ def train(whole_corpus, dim, epoch_num, window_size, word_samp_th, neg_samp_num,
                 continue
             word = corpus[t]
             context = np.r_[corpus[left : t], corpus[t + 1: right + 1]]
-            neg = neg_dist.gen(context.shape[0] * neg_samp_num).reshape(-1, neg_samp_num)
+            neg_rv = neg_dist.gen(context.shape[0] * neg_samp_num)
             v1_w = v1[word] # dim
             v2_c = v2[context, :] # context_num, dim
-            v2_neg = v2[neg.reshape(-1), :].reshape(-1, neg_samp_num, dim) # context_num, neg_samp_num, dim
+            v2_neg = v2[neg_rv, :].reshape(-1, neg_samp_num, dim) # context_num, neg_samp_num, dim
 
             w_c = np.dot(v2_c, v1_w) # context_num
             w_neg = np.dot(v2_neg, v1_w) # context_num, neg_samp_num
@@ -108,7 +108,7 @@ if __name__ == "__main__":
 
     min_count = 5
     window_size = 5
-    word_samp_th = 1e-3
+    word_samp_th = 1e-4
     dim = 100
     neg_samp_num = 5
     lr = 0.025
