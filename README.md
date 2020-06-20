@@ -31,7 +31,7 @@ python wiki_to_corpus_data.py -p wiki.txt -o wiki
 ```
 v11, v12, v13, ..., v1n, v21, ..., v2n, ...
 ```
-nは次元数、vij はi番目の単語ベクトルj成分。
+nは次元数、vij はi番目の単語ベクトルj成分。各 vij は double。
 
 ### 4. 実験
 
