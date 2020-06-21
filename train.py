@@ -40,11 +40,13 @@ def run():
         f.write(conf_str)
 
     print("Building executable file for training ... ")
-    subprocess.run("g++ src/train.cpp -o bin/train -mcmodel=large -std=c++1y -pthread -Wall -O3 -mtune=native -march=native", shell = True, check = True)
+    cmd = "g++ src/train.cpp -o bin/train -mcmodel=large -std=c++17 -pthread -Wall -O2 -mtune=native -march=native"
+    print(cmd)
+    subprocess.run(cmd, shell = True, check = True)
 
     cmd = f"./bin/train {args.corpus} {args.output} -e {args.epoch} -s {args.samp_disc} -l {args.lr} -w {args.window} -n {args.neg} -m {args.min_count} -t {args.thread_num}"
     print(cmd)
-    subprocess.run(cmd , shell = True, check = True)
+    subprocess.run(cmd, shell = True, check = True)
 
 if __name__ == "__main__":
     run()
