@@ -3,12 +3,15 @@ import numpy as np
 
 class VectorOperator:
     def __init__(self, dim, vec_path, word_to_id_path, id_to_word_path):
+        print("Loading vector binary file ... ")
         self.vector = np.fromfile(vec_path, "float64").reshape(-1, dim)
         with open(word_to_id_path, "rb") as f:
             self.to_id = pkl.load(f)
         with open(id_to_word_path, "rb") as f:
             self.to_word = pkl.load(f)
+        print("Preparing word vectors ...")
         self.norm = np.linalg.norm(self.vector, axis = -1)
+        self.norm = np.maximum(self.norm, 1e-8)
 
     def vec(self, word):
         return self.vector[self.to_id[word]]
